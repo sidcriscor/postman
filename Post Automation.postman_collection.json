@@ -1,0 +1,108 @@
+{
+	"info": {
+		"_postman_id": "4f3a3eb1-54cd-48df-be30-1be439927d59",
+		"name": "Post Automation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "PruebaPQR",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"postman.clearGlobalVariable(\"IdTransaccion\");\r",
+							"if(data.IdTransaccionCsv !== \"null\"){\r",
+							"    var IdTranLocal = ('\\\"' + data.IdTransaccionCsv + '\\\"');\r",
+							"    postman.setGlobalVariable(\"IdTransaccion\",IdTranLocal);\r",
+							"}else{\r",
+							"    postman.setGlobalVariable(\"IdTransaccion\",data.IdTransaccionCsv);\r",
+							"}\r",
+							"\r",
+							"postman.clearGlobalVariable(\"ModuloAplicacion\");\r",
+							"if(data.ModuloAplicacionCsv !== \"null\"){\r",
+							"    var ModuloAplicLocal = ('\\\"' + data.ModuloAplicacionCsv + '\\\"');\r",
+							"    postman.setGlobalVariable(\"ModuloAplicacion\",ModuloAplicLocal);\r",
+							"}else{\r",
+							"    postman.setGlobalVariable(\"ModuloAplicacion\",data.ModuloAplicacionCsv);\r",
+							"}\r",
+							"\r",
+							"postman.clearGlobalVariable(\"CodigoMensaje\");\r",
+							"if(data.CodigoMensajeCsv !== \"null\"){\r",
+							"    var CodigoMensajeLocal = ('\\\"' + data.CodigoMensajeCsv + '\\\"');\r",
+							"    postman.setGlobalVariable(\"CodigoMensaje\",CodigoMensajeLocal);\r",
+							"}else{\r",
+							"    postman.setGlobalVariable(\"CodigoMensaje\",data.CodigoMensajeCsv);\r",
+							"}\r",
+							"\r",
+							"postman.clearGlobalVariable(\"DescripcionMensaje\");\r",
+							"if(data.DescripcionMensajeCsv !== \"null\"){\r",
+							"    var DescripcionMensajeLocal = ('\\\"' + data.DescripcionMensajeCsv + '\\\"');\r",
+							"    postman.setGlobalVariable(\"DescripcionMensaje\",DescripcionMensajeLocal);\r",
+							"}else{\r",
+							"    postman.setGlobalVariable(\"DescripcionMensaje\",data.DescripcionMensajeCsv);\r",
+							"}\r",
+							"\r",
+							"postman.clearGlobalVariable(\"IdGuia\");\r",
+							"if(data.IdGuiaCsv !== \"null\"){\r",
+							"    var IdGuiaLocal = ('\\\"' + data.IdGuiaCsv + '\\\"');\r",
+							"    postman.setGlobalVariable(\"IdGuia\",IdGuiaLocal);\r",
+							"}else{\r",
+							"    postman.setGlobalVariable(\"IdGuia\",data.DescripcionMensajeCsv);\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 401\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Access is denied\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Access is denied\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"IdTransaccion\" : \"{{IdTransaccion}}\",\r\n  \"ModuloAplicacion\": \"{{ModuloAplicacion}}\",\r\n  \"CodigoMensaje\" : \"{{CodigoMensaje}}\",\r\n  \"DescripcionMensaje\" : \"{{DescripcionMensaje}}\",\r\n  \"IdGuia\":\"{{IdGuia}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://epm-vwt72.corp.epm.com.co/EPMCRMMatrizUAT/api/data/v8.2/ig_CRM_ProcesarRespuestaCorreoCertificado",
+					"protocol": "https",
+					"host": [
+						"epm-vwt72",
+						"corp",
+						"epm",
+						"com",
+						"co"
+					],
+					"path": [
+						"EPMCRMMatrizUAT",
+						"api",
+						"data",
+						"v8.2",
+						"ig_CRM_ProcesarRespuestaCorreoCertificado"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
